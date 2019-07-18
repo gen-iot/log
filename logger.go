@@ -28,6 +28,7 @@ type Config struct {
 	Level     logger.Level `json:"level" validate:"required"`
 	LogToFile bool         `json:"logToFile"`
 	LogsDir   string       `json:"logsDir"`
+	Timestamp bool         `json:"timestamp"`
 }
 
 var gConf = DefaultConfig
@@ -87,7 +88,8 @@ func InitWithConfig(config Config) {
 	logger.SetFormatter(&logger.TextFormatter{
 		EnvironmentOverrideColors: true,
 		ForceColors:               true,
-		FullTimestamp:             true,
+		FullTimestamp:             config.Timestamp,
+		DisableTimestamp:          !config.Timestamp,
 		TimestampFormat:           kDefaultLogTimeFormat,
 	})
 	logger.SetOutput(os.Stdout)

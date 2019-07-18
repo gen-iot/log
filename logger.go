@@ -56,7 +56,11 @@ func (l *LoggerProxy) Printf(format string, v ...interface{}) {
 
 var STD Logger = &LoggerProxy{
 	PrintlnCb: func(v ...interface{}) {
-		fmt.Println("STD ["+time.Now().Format(kDefaultLogTimeFormat)+"]", v)
+		if gConf.Timestamp {
+			fmt.Println("STD ["+time.Now().Format(kDefaultLogTimeFormat)+"]", v)
+		} else {
+			fmt.Println("STD ", v)
+		}
 	},
 	PrintfCb: func(format string, v ...interface{}) {
 		fmt.Printf(format, v...)

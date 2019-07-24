@@ -2,7 +2,7 @@ package log
 
 import (
 	"fmt"
-	"gitee.com/gen-iot/std"
+	"github.com/gen-iot/std"
 	"github.com/pkg/errors"
 	logger "github.com/sirupsen/logrus"
 	"os"

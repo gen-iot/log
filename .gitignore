@@ -2,7 +2,6 @@
 .vscode/
 vendor/
 FuckCRLF.exe
-Gopkg.lock
 # Binaries for programs and plugins
 *.exe
 *.exe~

@@ -1,9 +1,9 @@
 package log
 
 import (
+	"errors"
 	"fmt"
 	"github.com/gen-iot/std"
-	"github.com/pkg/errors"
 	logger "github.com/sirupsen/logrus"
 	"os"
 	"path/filepath"
@@ -67,16 +67,21 @@ var STD Logger = &LoggerProxy{
 	},
 }
 
+//noinspection ALL
 var DEBUG Logger = &EmptyLogger{}
 
+//noinspection ALL
 var INFO Logger = &EmptyLogger{}
 
+//noinspection ALL
 var WARN Logger = &EmptyLogger{}
 
 var ERROR Logger = &EmptyLogger{}
 
 //noinspection GoUnusedGlobalVariable
 var FATAL Logger = &EmptyLogger{}
+
+//noinspection ALL
 var PANIC Logger = &EmptyLogger{}
 
 func Init() {
@@ -85,7 +90,7 @@ func Init() {
 
 func InitWithConfig(config Config) {
 	if err := std.ValidateStruct(gConf); err != nil {
-		panic(errors.WithMessage(err, "logger配置不正确"))
+		panic(errors.New(fmt.Sprintf("logger配置不正确 : %s", err)))
 	}
 	STD.Println(kLoggerTag, "logger(level=", config.Level, ",toFile=", config.LogToFile, ",logsDir=", config.LogsDir, ") init ... ")
 	logger.SetLevel(config.Level)
